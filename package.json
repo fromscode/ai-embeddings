@@ -8,7 +8,8 @@
     "dev": "tsx --env-file=.env index.ts",
     "list:models": "tsx --env-file=.env listModels.ts",
     "embed": "tsx --env-file=.env embed.ts",
-    "embed:multiple": "tsx --env-file=.env embedMultiple.ts"
+    "embed:multiple": "tsx --env-file=.env embedMultiple.ts",
+    "rag": "tsx --env-file=.env simple-rag/ingestion.ts"
   },
   "keywords": [],
   "author": "",
