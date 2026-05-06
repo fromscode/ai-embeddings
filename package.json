@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx --env-file=.env index.ts",
-    "list:models": "tsx --env-file=.env listModels.ts"
+    "list:models": "tsx --env-file=.env listModels.ts",
+    "embed": "tsx --env-file=.env embed.ts"
   },
   "keywords": [],
   "author": "",
