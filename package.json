@@ -9,7 +9,8 @@
     "list:models": "tsx --env-file=.env listModels.ts",
     "embed": "tsx --env-file=.env embed.ts",
     "embed:multiple": "tsx --env-file=.env embedMultiple.ts",
-    "rag": "tsx --env-file=.env simple-rag/ingestion.ts"
+    "rag": "tsx --env-file=.env simple-rag/ingestion.ts",
+    "query": "tsx --env-file=.env simple-rag/query.ts"
   },
   "keywords": [],
   "author": "",
