@@ -1,22 +1,41 @@
 import getVector from "./getVector.js";
 
 import datasource from "../datasource.js";
+import { upsert } from "../upsert.js";
 
-const sentences = datasource.map((obj) => `Category: ${obj.category}.
-${obj.chunk_text}`);
+const sentences = datasource.map(
+  (obj) => `Category: ${obj.category}.
+${obj.chunk_text}`,
+);
 
 async function main() {
-    const responses = await getVector(sentences);
+  console.log("------ Ingestion Initiated ---------");
 
-    const vectors = responses.map(response => response!.values!);
+  const responses = await getVector(sentences);
 
-    for (let i=0; i<sentences.length; ++i) {
-        console.log(`Sentence: ${sentences[i]}, Vector: [${vectors[i]!.slice(0, 3).join(', ')}]`);
-    }
+  console.log("---------- Vectors created -------------");
 
-    // TO-DO: update these vectors to a vector db
+  const vectors = responses.map((response) => response!.values!);
 
-    // Further TO-DO: take a query from the user and then find the top k most popular vectors
+  const records = datasource.map((obj, i) => {
+    // console.log(i);
+    return {
+      id: obj._id,
+      values: vectors[i]!,
+      metadata: {
+        category: obj.category,
+        chunk_text: obj.chunk_text,
+      },
+    };
+  });
+
+  console.log("-------- Beginning insertion to vector database -------------");
+
+  await upsert(records);
+
+  console.log("----------- Data ingestion successfull -----------------");
+
+  // Further TO-DO: take a query from the user and then find the top k most popular vectors
 }
 
 main();
